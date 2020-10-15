@@ -1,0 +1,128 @@
+import java.util.*;  
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;   
+import java.util.Scanner;
+public class library
+{
+	String name;
+	String nameofthebook;
+	String phno;
+	int venueid[]=new int[2];
+	librarian Librarian; //AGGREGATION 
+	protected String collegename;
+	library(String collname)
+	{
+		collegename=collname;
+	}
+	library(String name,String nameofthebook,String phno,int v1,int v2,librarian Librarian)
+	{
+			this.name=name;
+			this.phno=phno;
+			this.nameofthebook=nameofthebook;
+			venueid[0]=v1;
+			venueid[1]=v2;
+			this.Librarian=Librarian;
+	}
+	public void getvenueid()
+	{
+		if(venueid[0]==1)
+		{
+			System.out.println("Computer science book Booked");
+		}
+		else
+		{
+			System.out.println("Civil Engineering book Booked");
+		}
+	}
+	private void details()
+	{
+		int collegeid=17041414;
+	}
+
+
+	public static void main(String args[])
+	{
+		String name;
+		String nameofthebook;
+		String phno;
+		int v1,v2;
+		librarian Librarian = new librarian("Akash","25252");
+		Scanner sc=new Scanner(System.in);
+		register.intro s1 = new register.intro();    
+		register obj[] = new register[1];
+		register.change();                
+		s1.show();
+		obj[0]=new register(args[0],1988542); 
+		System.out.println("****************");
+		System.out.println("Enter ur name");
+		name=sc.nextLine();
+		System.out.println("Enter Name of the book");
+		nameofthebook=sc.nextLine();
+		System.out.println("Enter ur phno");
+		phno=sc.nextLine();
+		System.out.println("Enter 1 for computer science book && Enter 2 for civil engineering book");
+		v1=sc.nextInt();
+		v2=sc.nextInt();
+		System.out.println("****************");
+		library br= new library(name,nameofthebook,phno,v1,v2,Librarian);
+		br.getvenueid();
+		obj[0].display("online");
+		System.out.println("Librarian Name: "+br.Librarian.librarianname);
+		System.out.println("Librarian ID: "+br.Librarian.librarianID);
+	}
+}
+
+class register extends library    ////inheritance  
+{
+	static String registerman = "joy";       
+	static void change()              
+	{
+		registerman="raj";
+	}
+	static 
+	{ 
+		System.out.println(".......HAI.............");
+	}     
+	register(String collname, int registerid)
+	{
+		super(collname);
+		int regid=registerid;
+	}
+	register(String collname, int registerid, int password)    
+	{
+		super(collname); ///super keyword
+		int p=password;
+		int regid= registerid;
+	}
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	LocalDateTime now = LocalDateTime.now();
+	void display() ///function overloading
+	{
+		System.out.println(collegename);
+		System.out.println(dtf.format(now));
+	}
+	void display(String mode)              
+	{
+		System.out.println("\n"+" In charge of the library: "+registerman+"\n"+"College Name : "+collegename);
+		System.out.println(dtf.format(now));
+		System.out.println("Booked by : "+mode);
+	}
+	static class intro     ///static class
+	{
+		void show()
+		{
+			System.out.println("Welcoome to star libraray");
+		}
+	}
+}
+class librarian  //Aggregation
+{
+  
+  String librarianname;
+  String librarianID;
+  
+  librarian(String librarianname, String librarianID) {
+    this.librarianname = librarianname;
+    this.librarianID = librarianID;
+  }
+}
